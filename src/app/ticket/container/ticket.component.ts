@@ -20,6 +20,7 @@ export class TicketComponent implements OnInit {
 
   ngOnInit() {
     this.tickets$ = this.store.select(fromStore.getAllTickets);
+    this.store.dispatch( new fromStore.LoadTickets())
   }
 
   onFilter(select: string) {

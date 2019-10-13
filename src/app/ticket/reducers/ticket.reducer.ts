@@ -11,20 +11,7 @@ export interface TicketState {
 }
 
 export const initialState: TicketState = {
-  data: [
-    {
-      id: 0,
-      description: 'Install a monitor arm',
-      assigneeId: 111,
-      completed: false
-    },
-    {
-      id: 1,
-      description: 'Move the desk to the new location',
-      assigneeId: 111,
-      completed: true
-    }
-  ],
+  data: [],
   loaded: false,
   loading: false
 };
@@ -43,10 +30,12 @@ export function reducer(
     }
 
     case TATY.LOAD_TICKETS_SUCCESS: {
+      const data: Ticket[] = action.payload;
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        data
       };
     }
 
