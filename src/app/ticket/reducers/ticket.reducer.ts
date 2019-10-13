@@ -57,6 +57,16 @@ export function reducer(
         loaded: false
       }
     }
+
+    case TATY.ADD_TICKET_SUCCESS: {
+      const ticket:Ticket = action.payload;
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        data: [...state.data, ticket]
+      }
+    }
   }
 
   return state;
