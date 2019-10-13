@@ -6,6 +6,13 @@ import { Ticket, User } from '../models';
 import * as fromStore from '../../store'
 import { Store } from '@ngrx/store';
 
+export enum TicketFilter {
+  BY_ID = 'id',
+  BY_DESC = 'description',
+  BY_AID = 'assigneeId',
+  BY_STATUS = 'completed'
+};
+
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
@@ -26,7 +33,7 @@ export class TicketComponent implements OnInit {
   onFilter(select: string) {
     if(select !== 'all') {
       const complete = ( select === "done") ? true : false;
-      this.tickets$ = this.store.select(fromStore.getTicketsBy(), {key: 'completed', value: complete });
+      this.tickets$ = this.store.select(fromStore.getTicketsBy(), {key: TicketFilter.BY_STATUS, value: complete });
     }
     else {
       this.tickets$ = this.store.select(fromStore.getAllTickets);
