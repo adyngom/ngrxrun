@@ -1,41 +1,46 @@
-<h2>Tickets List</h2>
-
-<section *ngIf=" tickets else loading">
-  <div class="filters" (click)="showTickets($event)">
-    <button data-action="all" [disabled]="(query === 'all')">All</button>&nbsp;&nbsp;
-    <button data-action="done" [disabled]="(query === 'done')">Done</button>&nbsp;&nbsp;
-    <button data-action="pending" [disabled]="(query === 'pending')">Pending</button>
-  </div>
-  <div class="create">
-    <button (click)="addTicket($event)">Add new ticket</button>
-    <form [formGroup]="form" novalidate>
-      <label>
-        <h4>Description:</h4>
-        <input type="text" formControlName="description" placeholder="enter a short title">
-      </label>
-
-      <label>
-        <h4>Assign ticket to:</h4>
-        <select formControlName="assigneeId">
-          <option value="">N/A</option>
-          <option value="1">Jane Doe</option>
-          <option value="2">John Dean</option>
-        </select>
-      </label>
-
-      <div class="form-actions">
-        <button (click)="createTicket(form)">Create</button>
-        &nbsp;&nbsp;
-        <button (click)="cancelCreate(form)">Cancel</button>
+<div id="wrapper">
+    <section>
+      <h2 class="section-title">Tickets List</h2>
+      <div id="tickets-wrapper" *ngIf=" tickets else loading">
+          <div class="filters" (click)="showTickets($event)">
+            <button data-action="all" [disabled]="(query === 'all')">All</button>&nbsp;&nbsp;
+            <button data-action="done" [disabled]="(query === 'done')">Done</button>&nbsp;&nbsp;
+            <button data-action="pending" [disabled]="(query === 'pending')">Pending</button>
+          </div>
+          <ul>
+            <li *ngFor="let t of tickets">
+              <a [routerLink]="['/tickets', t.id]">Ticket: {{t.id}}, {{t.description}}</a>
+            </li>
+          </ul>
       </div>
-    </form>
-  </div>
-  <ul>
-    <li *ngFor="let t of tickets">
-      <a [routerLink]="['/tickets', t.id]">Ticket: {{t.id}}, {{t.description}}</a>
-    </li>
-  </ul>
-</section>
+    </section>
+
+    <section class="create">
+      <h3 class="section-title">Add new ticket</h3>
+      <form [formGroup]="form" novalidate>
+        <label>
+          <h4>Description:</h4>
+          <input type="text" formControlName="description" placeholder="enter a short title">
+        </label>
+
+        <label>
+          <h4>Assign ticket to:</h4>
+          <select formControlName="assigneeId">
+            <option value="">N/A</option>
+            <option value="1">Jane Doe</option>
+            <option value="2">John Dean</option>
+          </select>
+        </label>
+
+        <div class="form-actions">
+          <button (click)="createTicket(form)">Create</button>
+          &nbsp;&nbsp;
+          <button (click)="cancelCreate(form)">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+</div>
 
 <ng-template #loading>
   <div>loading...</div>
