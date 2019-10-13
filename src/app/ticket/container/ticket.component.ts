@@ -26,7 +26,7 @@ export class TicketComponent implements OnInit {
   constructor(private store: Store<fromStore.State>) { }
 
   ngOnInit() {
-    this.tickets$ = this.store.select(fromStore.getAllTickets);
+    this.tickets$ = this.store.select( fromStore.getAllTickets );
     this.store.dispatch( new fromStore.LoadTickets())
   }
 

@@ -22,7 +22,7 @@ export const ROUTES: Routes = [
     component: TicketComponent
   },
   {
-    path: ':id',
+    path: ':ticketId',
     component: TicketSingleComponent
   }
 ]

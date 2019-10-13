@@ -1,6 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BackendService } from '../../../backend.service';
 import { Ticket } from '../../models';
 import { Observable } from 'rxjs';
 
@@ -16,19 +14,10 @@ import * as fromStore from '../../store'
 export class TicketSingleComponent implements OnInit {
   ticket$: Observable<Ticket>;
 
-  constructor(
-    private backendService: BackendService,
-    private store: Store<fromStore.State>,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+  constructor(private store: Store<fromStore.State>) { }
 
   ngOnInit() {
-    const ID = this.route.snapshot.params.id || null;
-    if(!!ID) {
-       // this.ticket$ = this.backendService.ticket( parseInt(ID, 10) );
-       this.ticket$ = this.store.select( fromStore.getTicketBy(), { key: 'id', value: parseInt(ID, 10) });
-       //this.store.dispatch( new fromStore.LoadTicket( parseInt(ID, 10) ) );
-    }
+    this.ticket$ = this.store.select( fromStore.getTicket );
+    //this.store.dispatch( new fromStore.LoadTicket( parseInt(ID, 10) ) );
   }
 }

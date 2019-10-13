@@ -7,10 +7,13 @@ import { environment } from '../environments/environment'
 
 
 // ngrx
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, CustomSerializer } from './store';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [] : [];
 
@@ -24,17 +27,18 @@ export const ROUTES: Routes = [
 ]
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
-    StoreModule.forRoot( {}, { metaReducers }),
+    StoreModule.forRoot( reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument(): [],
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule
   ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  providers: [{ provide: RouterStateSerializer,  useClass: CustomSerializer }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 
