@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { concatMap, switchMap, map, mergeMap, catchError } from 'rxjs/operators';
 import { Observable, of, from } from 'rxjs';
 import * as fromTickets from '../actions/ticket.actions';
-import { BackendService } from 'src/app/backend.service';
+import { BackendService } from '../../../app/backend.service';
 
 
 
