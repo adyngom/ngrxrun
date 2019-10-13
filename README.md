@@ -1,3 +1,3 @@
-# nrwl-coding-assignment-2018-yiw9uq
+# playing around with ngrx
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/nrwl-coding-assignment-2018-yiw9uq)
+there goes the weekend
