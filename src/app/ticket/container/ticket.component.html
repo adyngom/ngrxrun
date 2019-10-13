@@ -1,0 +1,7 @@
+<div *ngIf="tickets$ | async as tix">
+    <app-ticket-list 
+        [tickets]='tix' 
+        (filterBy)="onFilter($event)"
+        (create)="onCreate($event)"
+        ></app-ticket-list>
+</div>

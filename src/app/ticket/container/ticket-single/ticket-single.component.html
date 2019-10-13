@@ -1,0 +1,7 @@
+<article *ngIf = "ticket$ | async as ticket; else loading">
+    <small>Ticket #{{ticket.id}}</small>
+    <h3>{{ticket.description}}</h3>
+</article>
+<ng-template #loading>
+    <div>loading...</div>
+</ng-template>
