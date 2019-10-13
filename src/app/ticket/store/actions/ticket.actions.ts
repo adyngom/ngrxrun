@@ -1,11 +1,14 @@
 import { Action } from '@ngrx/store';
 
-import { Ticket } from '../../ticket/models';
+import { Ticket } from '../../models';
 
 export enum TicketActionTypes {
   LOAD_TICKETS = '[Ticket] Load Tickets',
   LOAD_TICKETS_FAIL = '[Ticket] Load Tickets Fail',
   LOAD_TICKETS_SUCCESS = '[Ticket] Load Tickets Success',
+  LOAD_TICKET = '[Ticket] Load Ticket',
+  LOAD_TICKET_FAIL = '[Ticket] Load Ticket Fail',
+  LOAD_TICKET_SUCCESS = '[Ticket] Load Ticket Success',
   SHOW_ALL_TICKETS = '',
   SHOW_DONE_TICKETS = '',
   SHOW_PENDING_TICKETS = '',
@@ -26,6 +29,21 @@ export class LoadTicketsFail implements Action {
 export class LoadTicketsSuccess implements Action {
   readonly type = TicketActionTypes.LOAD_TICKETS_SUCCESS;
   constructor(public payload: Ticket[]) {}
+}
+
+export class LoadTicket implements Action {
+  readonly type = TicketActionTypes.LOAD_TICKET;
+  constructor(public payload: number) {}
+}
+
+export class LoadTicketFail implements Action {
+  readonly type = TicketActionTypes.LOAD_TICKET_FAIL;
+  constructor(public error: any = 'Failed to load ticket') {}
+}
+
+export class LoadTicketSuccess implements Action {
+  readonly type = TicketActionTypes.LOAD_TICKET_SUCCESS;
+  constructor(public payload: Ticket ) {}
 }
 
 export class ShowAllTickets implements Action {
@@ -62,6 +80,9 @@ export class AddTicketFail implements Action {
 export type TicketActions = LoadTickets | 
                             LoadTicketsFail | 
                             LoadTicketsSuccess |
+                            LoadTicket | 
+                            LoadTicketFail | 
+                            LoadTicketSuccess |
                             ShowAllTickets |
                             ShowDonetickets |
                             ShowPendingTickets | 

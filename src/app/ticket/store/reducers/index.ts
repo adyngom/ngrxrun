@@ -6,9 +6,9 @@ import {
   MetaReducer
 } from '@ngrx/store';
 
-import * as fromTickets from '../../ticket/reducers/ticket.reducer';
+import * as fromTickets from './ticket.reducer';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 
 
@@ -28,6 +28,7 @@ export const getTicketState = createSelector(
 );
 
 export const getAllTickets     = createSelector( getTicketState, fromTickets.getTickets);
+export const getTicketBy       = () => createSelector( getTicketState, fromTickets.getTicketBy);
 export const getTicketsBy      = () => createSelector( getTicketState, fromTickets.getTicketsBy);
 export const getTicketsLoaded  = createSelector( getTicketState, fromTickets.getTicketsLoaded);
 export const getTicketsLoading = createSelector( getTicketState, fromTickets.getTicketsLoading);

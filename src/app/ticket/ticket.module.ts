@@ -5,15 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../store/reducers'
+import { reducers } from './store/reducers'
 
 import { BackendService } from '../backend.service';
 import { TicketComponent } from './container/ticket.component';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { TicketSingleComponent } from './container/ticket-single/ticket-single.component';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromTicket from './reducers/ticket.reducer';
-import { TicketEffects } from '../store/effects/ticket.effects';
+import * as fromTicket from './store/reducers/ticket.reducer';
+import { TicketEffects } from './store/effects/ticket.effects';
 
 // Routes
 export const ROUTES: Routes = [

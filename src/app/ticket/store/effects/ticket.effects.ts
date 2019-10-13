@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { concatMap, switchMap, map, mergeMap, catchError } from 'rxjs/operators';
 import { Observable, of, from } from 'rxjs';
 import * as fromTickets from '../actions/ticket.actions';
-import { BackendService } from '../../../app/backend.service';
+import { BackendService } from '../../../backend.service';
 
 
 
@@ -23,6 +23,18 @@ export class TicketEffects {
       this.backendService.tickets().pipe(
         map( tickets => new fromTickets.LoadTicketsSuccess(tickets)),
         catchError((err) => of( new fromTickets.LoadTicketsFail(err)))
+      )  
+    )
+  );
+
+  // Load one ticket 
+  @Effect()
+  loadTicket$: Observable<any> = this.actions$.pipe(
+    ofType(fromTickets.TicketActionTypes.LOAD_TICKET),
+    mergeMap( action => 
+      this.backendService.ticket(action['payload']).pipe(
+        map( ticket => new fromTickets.LoadTicketSuccess(ticket) ),
+        catchError((err) => of( new fromTickets.LoadTicketFail(err)))
       )  
     )
   );

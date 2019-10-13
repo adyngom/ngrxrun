@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { Ticket, User } from '../models';
 
-import * as fromStore from '../../store'
+import * as fromStore from '../store'
 import { Store } from '@ngrx/store';
 
 export enum TicketFilter {
